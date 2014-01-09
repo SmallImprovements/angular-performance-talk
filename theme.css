@@ -70,11 +70,15 @@ body {
 }
 
 .si-slide footer {
+	font-size: 1em;
 	position: absolute;
 	bottom: 10px;
 	right: 20px;
-	font-size: 0.5em;
 	text-align: right;
+
+}
+.si-slide footer a {
+	color: #000;
 }
 
 .si-slide .col-left {
@@ -109,6 +113,7 @@ body {
 
 .si-slide.si-slide-no-bg footer a {
 	color: #fff;
+	font-weight: 100;
 	text-decoration: none;
 }
 
