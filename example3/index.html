@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>stuff</title>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="app.js"></script>
+	</head>
+
+	<body ng-app="app">
+
+		<div ng-repeat="num in numbers">
+			<ng-include src="'num-tpl'"></ng-include>
+		</div>
+
+		<script type="text/ng-template" id="num-tpl">
+			<p>{{num}}</p>
+		</script>
+
+	</body>
+
+</html>

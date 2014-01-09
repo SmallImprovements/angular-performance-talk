@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>showif</title>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="app.js"></script>
+	</head>
+	<body ng-app="example">
+		<ul>
+			<li ng-repeat="contact in contacts">
+				<h2><input ng-model="contact.name" /></h2>
+				<p><a href="#" ng-click="showsDetails = !showsDetails">{{ showsDetails ? 'Hide' : 'Show'}} Details</a></p>
+				<div ng-show="showsDetails">
+					<table>
+						<tr>
+							<td>Name</td>
+							<td>{{contact.name}}</td>
+						</tr>
+						<tr>
+							<td>Mail</td>
+							<td>{{contact.mail}}</td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td>{{contact.phone}}</td>
+						</tr>
+						<tr>
+							<td>Website</td>
+							<td>{{contact.website}}</td>
+						</tr>
+						<tr>
+							<td>Mail</td>
+							<td>{{contact.mail}}</td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td>{{contact.phone}}</td>
+						</tr>
+						<tr>
+							<td>Website</td>
+							<td>{{contact.website}}</td>
+						</tr>
+						<tr>
+							<td>Mail</td>
+							<td>{{contact.mail}}</td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td>{{contact.phone}}</td>
+						</tr>
+						<tr>
+							<td>Website</td>
+							<td>{{contact.website}}</td>
+						</tr>
+						<tr>
+							<td>Mail</td>
+							<td>{{contact.mail}}</td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td>{{contact.phone}}</td>
+						</tr>
+						<tr>
+							<td>Website</td>
+							<td>{{contact.website}}</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+		</ul>
+	</body>
+</html>

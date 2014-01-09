@@ -1,0 +1,129 @@
+body {
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 1em;
+}
+
+.reveal h2, .reveal h1 {
+	font-weight: 200;
+	color: #888;
+}
+
+.reveal h1, .reveal h3 {
+	margin-bottom: 0.5em;
+}
+
+.reveal h2 {
+	font-size: 3em;
+}
+
+.reveal h3 {
+	font-size: 2em;
+}
+
+.reveal h2:not(:last-child) {
+	margin-bottom: 1em;
+}
+
+.reveal a {
+	text-decoration: none;
+	color: #5790bd;
+}
+
+.reveal p, .reveal li {
+	margin-bottom: 1em;
+	font-size: 1.5em;
+}
+
+.reveal pre code {
+	font-size: 1.7rem;
+	margin-bottom: 1rem;
+	padding: 1em;
+	line-height: 1.5;
+}
+
+.reveal li {
+	margin-bottom: 0.5em;
+	line-height: 1.3;
+}
+
+.si-background {
+	font-size: 2em;
+}
+
+.reveal .si-slide {
+	position: relative;
+}
+
+.reveal.overview .slides section.si-slide {
+	background: #fff;
+}
+
+.reveal.overview .slides section.si-slide.si-slide-no-bg {
+	background: #000;
+}
+
+
+.reveal .si-example {
+	border: 1px solid #000;
+	margin: 20px;
+	padding: 5px;
+}
+
+.si-slide footer {
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
+	font-size: 0.5em;
+	text-align: right;
+}
+
+.si-slide .col-left {
+	float: left;
+	width: 50%;
+}
+
+.si-slide .col-right {
+	float: left;
+	width: 50%;
+}
+
+.si-slide header {
+	margin: 80px;
+}
+
+.si-slide .si-giant {
+	font-size: 5em;
+	font-family: monospace;
+	margin: 0;
+}
+
+.reveal .quote {
+    margin-bottom: 20px;
+
+}
+
+.si-slide.si-slide-no-bg {
+	background: transparent;
+	/*background: #000*/
+}
+
+.si-slide.si-slide-no-bg footer a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.si-slide .white-headline {
+    color: #FFF;
+    font-weight: 100;
+}
+.reveal ol.list {
+    margin-left: 80px;
+}
+
+.reveal .slides section .fragment.current-visible {
+    display: none;
+}
+
+.reveal .slides section .fragment.current-visible.current-fragment {
+    display: inline-block;
+}

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>AngularJS perfomance tuning</title>
+		<link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css" />
+		<link rel="stylesheet" href="bower_components/reveal.js/lib/css/zenburn.css" />
+		<link rel="stylesheet" href="theme.css" />
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/reveal.js/js/reveal.js"></script>
+		<script src="bower_components/reveal.js/lib/js/head.min.js"></script>
+		<script src="examples.js"></script>
+	</head>
+	<body class="si-background">
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="si-slide">
+
+					<header>
+						<h1>Supercharge AngularJS</h1>
+						<h2>Performance Measurement and Tuning</h2>
+					</header>
+
+					<div class="cols">
+						<div class="col-left">
+							<p><img src="img/angular.png" style="height: 150px" /></p>
+						</div>
+						<div class="col-right">
+							<p><img src="img/smallimprovements.png" style="height: 150px" /></p>
+						</div>
+					</div>
+
+					<footer style="font-size:1em">Sebastian Fröstl && Damien Klinnert</footer>
+				</section>
+
+				<section class="si-slide" data-background="#000">
+					<p class="si-giant white-headline">
+						We <span style="color:red">&lt;3</span> angular.js
+					</p>
+
+					<!--
+						Basti:
+						Reasons: Fast, simple, declarative, powerful
+						Improved our frontend engineering workflow
+						Enforces best practices
+					-->
+				</section>
+
+				<section class="si-slide">
+
+					<div class="cols">
+						<div class="col-left">
+							<div class="si-example">
+								<div ng-app="si.example1" ng-init="name = 'world'">
+									<h3>Hello {{name}}!</h3>
+									<input style="font-size:1.5em" ng-model="name" />
+								</div>
+							</div>
+						</div>
+						<div class="col-right">
+							<pre><code class="xml" data-trim>
+<h3>Hello {{name}}</h3>
+<input ng-model="name">
+							</code></pre>
+						</div>
+					</div>
+
+					<!--
+						Damien:
+
+						You all know this example
+						See how awesome this is, looks so great
+					-->
+				</section>
+
+				<section class="si-slide si-slide-no-bg" data-background="#000">
+					<p><img style="width:100em" src="img/meme.jpg" /></p>
+				</section>
+
+				<section class="si-slide si-slide-no-bg" data-background="#000">
+					<p><img style="width:200em" src="img/slowshot.png" /></p>
+
+					<!--
+						kinda sluggy when it comes to huge lists<
+					-->
+
+					<!-- Damien: you know - this sucks -->
+
+				</section>
+				<section class="si-slide" data-background="#000">
+
+					<!-- two main bottle necks
+						1. dirty checking (watching for model changes)
+						2. DOM updates (Angular does this very intelligent just before javascript execution in batches)
+					-->
+
+					<h2 class="white-headline">Behind the AngularJS magic</h2>
+				</section>
+
+				<section class="si-slide">
+					<p class="fragment current-visible">
+						<img src="img/scope-tree-start.png" alt="">
+					</p>
+					<p class="fragment current-visible">
+						<img src="img/scope-tree.png" alt="">
+					</p>
+					<p class="fragment current-visible">
+						<img src="img/scope-tree-apply.png" alt="">
+					</p>
+					<p class="fragment">
+						<img src="img/scope-tree-digest.png" alt="">
+					</p>
+
+
+					<!-- 4 triggers (when something here happens) -->
+
+					<!--
+						DOM events (user changing value of an input field, clicking on a button to invoke a JavaScript function and so on)
+						• XHR responses firing callbacks
+						• Browser's location changes
+						• Timers (setTimout, setInterval) firing the callbacks
+					 -->
+
+						<!-- check tree of scopes (multiple times until nothing changes) models are stable
+						=> update dom -->
+
+						<!-- $digest loop in AngularJS is the process of detecting model changes. It  -->
+						<!-- $digest checks current scope and all child scopes -->
+						<!-- $apply calls digest loop on all scopes starting by rootScope  -->
+						<!-- transcluded scope within an isolated scope is made a sibling of the isolated scope as child of the isolated scopes parent  -->
+
+						<!-- watchExpression is executed at least once (usually twice)
+ -->
+					</p>
+
+					<!-- say: so this is why it gets slow and you need some optimizations -->
+
+				</section>
+
+				<section class="si-slide si-slide-no-bg" data-background="#000">
+					<h2 class="white-headline">One: <br />Address book</h2>
+					<footer><a href="example1/index.html" target="_blank" class="white-headline">Demo</a></footer>
+				</section>
+
+				<section class="si-slide si-slide-no-bg">
+					<h2>Avoid watching invisible elements</h2>
+					<h4>limit number of watches, use ng-if instead of ng-show</h4>
+				</section>
+
+				<section class="si-slide si-slide-no-bg" data-background="#000">
+					<h2 class="white-headline">Two: <br /> Bakery</h2>
+					<footer><a href="example2/index.html" target="_blank" class="white-headline">Demo</a></footer>
+				</section>
+
+				<section class="si-slide si-slide-no-bg">
+					<h2>No complex watch statements</h2>
+					<h4>precalculate and cache results, make watches simple and fast</h4>
+				</section>
+
+				<section class="si-slide si-slide-no-bg" data-background="#000">
+					<h2 class="white-headline">Three: <br /> Numbers</h2>
+					<footer><a href="example3/index.html" target="_blank" class="white-headline">Demo</a></footer>
+				</section>
+
+				<section class="si-slide si-slide-no-bg">
+					<h2>Ensure DOM updates are batched</h2>
+					<h4>don't use ng-include in ng-repeat, prefill the template cache</h4>
+				</section>
+
+				<section class="si-slide">
+
+					<h2>Workflow</h2>
+
+					<blockquote class="quote">“Performance tuning – set expectations, measure, tune, and repeat” – {1}
+					</blockquote>
+
+					<br>
+
+					<ol class="list">
+						<li>Have a problem (no premature optimizations)</li>
+						<li>Set time/ budget limits</li>
+						<li>Measure correctly</li>
+						<li>Find main bottle necks</li>
+						<li>Fix bottlenecks one by one <br>(constantly measure and evaluate new state)
+						</li>
+					</ol>
+				</section>
+
+				<section class="si-slide">
+
+					<h2>Wrap up</h2>
+					<ul>
+						<li>AngularJS detects model changes by dirty checking. Within the $digest cycle a previous stored value is compared to the actual model value. Process is repeated until models are stable</li>
+						<li>One: Don't watch for invisible (ng-if > ng-show)</li>
+						<li>Two: Avoid complex watch-expressions</li>
+						<li>Three: Ensure DOM updtes are batched</li>
+						<li>Workflow: detect problem, set expectations, measure, fix, repeat</li>
+					</ul>
+					<br /><br /><br /><br />
+					<h3><a href="https://www.small-improvements.com/careers">* Small Improvements is hiring</a></h3>
+					<h4>visit small-improvements.com/careers</h4>
+
+				</section>
+
+
+				<section class="si-slide">
+					<h2>References</h2>
+
+					<ol class="list">
+						<li>Mastering Web Application Development with AngularJS, Pawel Kozlowski, Peter Bacon Darwin, Packt Publishing, 23. August 2013</li>
+						<li><a href="http://tech.small-improvements.com/2013/09/10/angularjs-performance-with-large-lists/">AngularJS Performance Tuning for Long Lists</a></li>
+						<li><a href="http://blog.scalyr.com/2013/10/31/angularjs-1200ms-to-35ms/">Optimizing AngularJS: 1200ms to 35ms</a></li>
+						<li><a href="http://tech.small-improvements.com/2013/11/28/analysing-performance-of-angularjs-screens/">Analysing Performance of AngularJS Screens</a></li>
+						<li><a href="http://stackoverflow.com/questions/9682092/databinding-in-angularjs/9693933#9693933">Misco Hevery on AngularJS performance</a></li>
+						<li><a href="http://thenittygritty.co/angularjs-pitfalls-using-scopes">AngularJS: 6 Common Pitfalls Using Scopes</a></li>
+						<li><a href="https://github.com/Pasvaz/bindonce">Bindonce: Zero watches binding for AngularJS </a></li>
+					</ol>
+
+				</section>
+			</div>
+		</div>
+		<script>
+			Reveal.initialize({
+				width: 1920,
+				height: 1200,
+				history: true,
+				transition: 'linear',
+				dependencies: [
+					{
+						src: './bower_components/reveal.js/plugin/highlight/highlight.js',
+						async: true,
+						callback: function() {
+							hljs.initHighlightingOnLoad();
+						}
+					}
+				]
+			});
+		</script>
+	</body>
+</html>

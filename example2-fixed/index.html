@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <title>Bakery</title>
+</head>
+<body ng-app="example3">
+    <div ng-controller="MainCtrl">
+
+      Search: <input class="name" type="text" ng-model="name"/>
+
+      <table>
+        <thead>
+          <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>taste</td>
+            <td>price</td>
+            <td>type</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in items | filter:name | orderBy:'id'">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.type}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+</body>
+</html>
